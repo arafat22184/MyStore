@@ -1,10 +1,11 @@
+import LandingPage from "@/components/LandingPage";
 import NavBar from "@/components/Navbar";
 
 export default function Home() {
   return (
     <div>
       <NavBar></NavBar>
-      <p>Hello World</p>
+      <LandingPage></LandingPage>
     </div>
   );
 }
