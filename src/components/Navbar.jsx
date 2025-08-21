@@ -11,7 +11,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="bg-white shadow-md text-black sticky top-0 z-50">
+    <nav className="bg-white/40 shadow-2xs text-black sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           {/* Logo */}
@@ -51,12 +51,12 @@ export default function Navbar() {
                 </button>
               </>
             ) : (
-              <button
-                onClick={() => signIn("google")} // you can also use credentials
+              <Link
+                href={"/login"}
                 className="bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600"
               >
                 Login
-              </button>
+              </Link>
             )}
           </div>
 
