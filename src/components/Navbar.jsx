@@ -11,7 +11,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="bg-white/40 shadow-2xs text-black sticky top-0 z-50">
+    <nav className="bg-white shadow-2xs text-black sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           {/* Logo */}
@@ -37,11 +37,8 @@ export default function Navbar() {
 
             {session ? (
               <>
-                <Link
-                  href="/dashboard/add-product"
-                  className="hover:text-blue-600"
-                >
-                  Dashboard
+                <Link href="/addProduct" className="hover:text-blue-600">
+                  Add Product
                 </Link>
                 <button
                   onClick={() => signOut()}
@@ -82,11 +79,8 @@ export default function Navbar() {
 
             {session ? (
               <>
-                <Link
-                  href="/dashboard/add-product"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Dashboard
+                <Link href="/addProduct" onClick={() => setIsOpen(false)}>
+                  Add Product
                 </Link>
                 <button
                   onClick={() => {
