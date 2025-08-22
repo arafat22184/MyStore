@@ -3,9 +3,9 @@ const nextConfig = {
   experimental: {
     serverActions: true,
   },
-  images: { 
+  images: {
     unoptimized: true,
-    domains: ['images.pexels.com']
+    domains: ["images.pexels.com", "lh3.googleusercontent.com"],
   },
 };
 
