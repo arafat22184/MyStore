@@ -89,14 +89,14 @@ export default function Footer() {
             <ul className="space-y-3 text-gray-400">
               <li className="flex items-start space-x-2">
                 <Phone className="h-4 w-4 mt-0.5" />
-                <span className="text-sm">+1 (555) 123-4567</span>
+                <span className="text-sm">+880 17471-44726</span>
               </li>
               <li className="flex items-start space-x-2">
                 <MapPin className="h-4 w-4 mt-0.5" />
                 <span className="text-sm">
-                  123 Tech Street
+                  Mirpur-2, Dhaka-1216
                   <br />
-                  San Francisco, CA 94105
+                  Bangladesh
                 </span>
               </li>
             </ul>
@@ -105,7 +105,7 @@ export default function Footer() {
 
         {/* Bottom */}
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400 text-sm">
-          <p>&copy; 2025 TechStore. All rights reserved.</p>
+          <p>&copy; 2025 MyStore. All rights reserved.</p>
         </div>
       </div>
     </footer>

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 import { useState } from "react";
-import { Menu, X, User } from "lucide-react";
+import { Menu, X, User, ShoppingBasket } from "lucide-react";
 import Image from "next/image";
 
 export default function Navbar() {
@@ -17,8 +17,12 @@ export default function Navbar() {
         <div className="flex justify-between h-16 items-center">
           {/* Logo / Left */}
           <div className="flex-shrink-0">
-            <Link href="/" className="text-2xl font-bold text-white">
-              Store
+            <Link
+              href="/"
+              className="text-2xl font-bold text-white flex gap-2 items-center justify-center"
+            >
+              <ShoppingBasket className="h-8 w-8 text-blue-400" />
+              My Store
             </Link>
           </div>
 

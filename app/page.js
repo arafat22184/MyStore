@@ -18,7 +18,7 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className="relative h-96 flex flex-col items-center justify-center text-center text-white bg-gradient-to-r from-blue-600 to-indigo-600 overflow-hidden">
         <h1 className="text-5xl md:text-6xl font-bold mb-4 drop-shadow-lg">
-          Welcome to Our Store
+          Welcome to My Store
         </h1>
         <p className="text-lg md:text-xl mb-6 drop-shadow-md">
           Browse and manage products with ease
