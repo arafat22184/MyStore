@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { useState } from "react";
@@ -7,27 +8,44 @@ import toast from "react-hot-toast";
 export default function AddProductPage() {
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
-  const [feature, setFeature] = useState("");
+  const [featureInput, setFeatureInput] = useState("");
+  const [features, setFeatures] = useState([]);
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
+  const [preview, setPreview] = useState(null);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
+  const categories = ["Electronics", "Fitness", "Photography", "Office"];
+
+  const handleAddFeature = () => {
+    if (featureInput.trim()) {
+      setFeatures([...features, featureInput.trim()]);
+      setFeatureInput("");
+    }
+  };
+
+  const handleRemoveFeature = (index) => {
+    setFeatures(features.filter((_, i) => i !== index));
+  };
+
   async function handleSubmit(e) {
     e.preventDefault();
-
-    if (!name || !category || !price || !description || !image || !feature) {
-      toast.error("All fields are required, including image!");
+    if (
+      !name ||
+      !category ||
+      !price ||
+      !description ||
+      !image ||
+      features.length === 0
+    ) {
+      toast.error("All fields are required, including image and features!");
       return;
     }
 
-    const convertFeature = feature.split(",").map((item) => item.trim());
-
     setLoading(true);
-
     try {
-      // Convert image file to Base64
       const base64Image = await convertToBase64(image);
 
       const res = await fetch("/api/products", {
@@ -39,12 +57,11 @@ export default function AddProductPage() {
           price: parseFloat(price),
           description,
           image: base64Image,
-          features: convertFeature,
+          features,
         }),
       });
 
       const data = await res.json();
-
       if (data.success) {
         toast.success("✅ Product added successfully!");
         router.push("/products");
@@ -58,14 +75,17 @@ export default function AddProductPage() {
     }
   }
 
-  // Helper function to convert image to Base64
-  const convertToBase64 = (file) => {
-    return new Promise((resolve, reject) => {
+  const convertToBase64 = (file) =>
+    new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = () => resolve(reader.result);
       reader.onerror = (error) => reject(error);
     });
+
+  const handleImageChange = (file) => {
+    setImage(file);
+    setPreview(URL.createObjectURL(file));
   };
 
   return (
@@ -84,9 +104,9 @@ export default function AddProductPage() {
             <input
               type="text"
               placeholder="Enter product name"
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               value={name}
               onChange={(e) => setName(e.target.value)}
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
@@ -95,13 +115,18 @@ export default function AddProductPage() {
             <label className="block text-gray-700 font-medium mb-1">
               Category
             </label>
-            <input
-              type="text"
-              placeholder="Enter category"
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-            />
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="">Select Category</option>
+              {categories.map((cat) => (
+                <option key={cat} value={cat}>
+                  {cat}
+                </option>
+              ))}
+            </select>
           </div>
 
           {/* Features */}
@@ -109,13 +134,39 @@ export default function AddProductPage() {
             <label className="block text-gray-700 font-medium mb-1">
               Features
             </label>
-            <input
-              type="text"
-              placeholder="Enter features separet by coma"
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              value={feature}
-              onChange={(e) => setFeature(e.target.value)}
-            />
+            <div className="flex gap-2 mb-2">
+              <input
+                type="text"
+                placeholder="Enter feature"
+                value={featureInput}
+                onChange={(e) => setFeatureInput(e.target.value)}
+                className="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <button
+                type="button"
+                onClick={handleAddFeature}
+                className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
+              >
+                Add
+              </button>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {features.map((f, i) => (
+                <span
+                  key={i}
+                  className="bg-gray-200 text-gray-700 px-3 py-1 rounded-full flex items-center gap-2"
+                >
+                  {f}
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveFeature(i)}
+                    className="text-red-500 font-bold hover:text-red-700"
+                  >
+                    ×
+                  </button>
+                </span>
+              ))}
+            </div>
           </div>
 
           {/* Price */}
@@ -126,9 +177,9 @@ export default function AddProductPage() {
             <input
               type="number"
               placeholder="Enter price"
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
@@ -139,10 +190,10 @@ export default function AddProductPage() {
             </label>
             <textarea
               placeholder="Enter product description"
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
-              rows={4}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+              rows={4}
             />
           </div>
 
@@ -154,9 +205,16 @@ export default function AddProductPage() {
             <input
               type="file"
               accept="image/*"
+              onChange={(e) => handleImageChange(e.target.files[0])}
               className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              onChange={(e) => setImage(e.target.files[0])}
             />
+            {preview && (
+              <img
+                src={preview}
+                alt="Preview"
+                className="mt-4 h-40 w-full object-cover rounded-lg"
+              />
+            )}
           </div>
 
           {/* Submit Button */}
