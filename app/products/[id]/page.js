@@ -24,8 +24,6 @@ export default function ProductDetails() {
     }
   }, [id]);
 
-  console.log(product);
-
   if (!product) {
     return (
       <div className="flex justify-center items-center h-screen text-lg">
