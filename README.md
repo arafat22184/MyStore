@@ -126,5 +126,5 @@ This is a simple **Next.js 15** application demonstrating public and protected p
 ## Author
 
 - Your Name
-- GitHub: [https://github.com/your-username](https://github.com/arafat22184)
-- Live Site: [https://your-live-site.vercel.app](https://your-live-site.vercel.app)
+- GitHub: [https://github.com/arafat22184](https://github.com/arafat22184)
+- Live Site: [https://assignment-10-one-xi.vercel.app/](https://assignment-10-one-xi.vercel.app/)
