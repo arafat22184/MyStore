@@ -1,6 +1,8 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
+import bcrypt from "bcryptjs";
+import clientPromise from "../../../../lib/mongodb";
 
 export const authOptions = {
   providers: [
@@ -11,15 +13,20 @@ export const authOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        // For testing: accept any credentials
-        if (credentials.email && credentials.password) {
-          return {
-            id: "1",
-            name: credentials.email,
-            email: credentials.email,
-          };
-        }
-        return null;
+        const client = await clientPromise;
+        const db = client.db("mydatabase");
+        const users = db.collection("users");
+
+        const user = await users.findOne({ email: credentials.email });
+        if (!user) return null;
+
+        const isValid = await bcrypt.compare(
+          credentials.password,
+          user.password
+        );
+        if (!isValid) return null;
+
+        return { id: user._id.toString(), name: user.name, email: user.email };
       },
     }),
     GoogleProvider({
@@ -32,6 +39,4 @@ export const authOptions = {
 };
 
 const handler = NextAuth(authOptions);
-
-// Next.js App Router needs this export
 export { handler as GET, handler as POST };
