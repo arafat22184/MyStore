@@ -1,8 +1,22 @@
 # Next.js Product Management App
 
+# **🌐 Live Site:** [My Store](https://assignment-10-one-xi.vercel.app/)
+
 ## Project Overview
 
 This is a simple **Next.js 15** application demonstrating public and protected pages with basic authentication using **NextAuth.js**. Users can explore products on the landing page and product list, view product details, and, after logging in, manage products via a protected dashboard page.
+
+---
+
+## Screenshots
+
+### Landing Page
+
+![Landing Page](https://i.ibb.co.com/5WMZhqxH/homepage.png)
+
+### Products Page
+
+![Products Page](https://i.ibb.co.com/bwdBfjT/products-Page.png)
 
 ---
 
@@ -109,20 +123,8 @@ This is a simple **Next.js 15** application demonstrating public and protected p
 
 ---
 
-## Screenshots
-
-### Landing Page
-
-![Landing Page](https://i.ibb.co.com/5WMZhqxH/homepage.png)
-
-### Products Page
-
-![Products Page](https://i.ibb.co.com/bwdBfjT/products-Page.png)
-
----
-
 ## Author
 
 - Your Name
-- GitHub: [https://github.com/your-username](https://github.com/your-username)
+- GitHub: [https://github.com/your-username](https://github.com/arafat22184)
 - Live Site: [https://your-live-site.vercel.app](https://your-live-site.vercel.app)
