@@ -1,6 +1,6 @@
 # Next.js Product Management App
 
-# **🌐 Live Site:** [My Store](https://assignment-10-one-xi.vercel.app/)
+# _🌐 Live Site:_ [My Store](https://assignment-10-one-xi.vercel.app/)
 
 ## Project Overview
 
@@ -125,6 +125,6 @@ This is a simple **Next.js 15** application demonstrating public and protected p
 
 ## Author
 
-- Your Name
+- Md. Abdulla All Arafat
 - GitHub: [https://github.com/arafat22184](https://github.com/arafat22184)
 - Live Site: [https://assignment-10-one-xi.vercel.app/](https://assignment-10-one-xi.vercel.app/)
