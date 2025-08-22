@@ -5,7 +5,7 @@ import { Providers } from "./providers"; // client wrapper
 import { Toaster } from "react-hot-toast";
 
 export const metadata = {
-  title: "My App",
+  title: "My Store",
   description: "Next.js App with NextAuth",
 };
 
