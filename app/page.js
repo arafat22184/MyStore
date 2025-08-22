@@ -10,7 +10,7 @@ export default function HomePage() {
   useEffect(() => {
     fetch("/api/products")
       .then((res) => res.json())
-      .then((data) => setProducts(data));
+      .then((data) => setProducts(data.slice(0, 8)));
   }, []);
 
   return (
