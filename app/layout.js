@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
       <body>
         <Providers>
           <Navbar />
-          <main className="min-h-screen">{children}</main>
+          <main>{children}</main>
           <Footer />
           {/* ✅ Global Toaster for notifications */}
           <Toaster position="top-right" reverseOrder={false} />
